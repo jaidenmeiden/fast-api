@@ -13,5 +13,5 @@ pip install fastapi uvicorn
 
 ### Launch application
 ```
-uvicorn main:app --reload
+uvicorn basic:app --reload
 ```
