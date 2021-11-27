@@ -30,6 +30,10 @@ uvicorn main:app --reload
 
 [Path Parameters and Numeric Validations](https://fastapi.tiangolo.com/tutorial/path-params-numeric-validations/)
 
+# Specification pydantic
+
+[Field Types](https://pydantic-docs.helpmanual.io/usage/types/)
+
 # Tools
 
 ### [fastAPI](https://fastapi.tiangolo.com/)
