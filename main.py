@@ -6,7 +6,7 @@ from fastapi import FastAPI, Body, Path, Query
 # Own classes
 from models import person
 from models.location import Location
-from models.person import Person
+from models.person import Person, PersonOut
 
 app = FastAPI()
 
@@ -24,7 +24,7 @@ send the person information, means that is mandatory
 
 
 # Request and response body
-@app.post("/persons/new")
+@app.post("/persons/new", response_model=PersonOut)
 async def create_person(person: Person = Body(...)):
     return person
 
@@ -52,7 +52,7 @@ async def show_person(
             max_length=50,
             title="Person age",
             description="This is the person age. It's a value greater than zero",
-            example=13
+            example=27
         ),
 ):
     return {person_id, first_name, age}

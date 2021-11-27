@@ -30,6 +30,8 @@ uvicorn main:app --reload
 
 [Path Parameters and Numeric Validations](https://fastapi.tiangolo.com/tutorial/path-params-numeric-validations/)
 
+[Response Model](https://fastapi.tiangolo.com/tutorial/response-model/?h=response+model#response_model_include-and-response_model_exclude)
+
 # Specification pydantic
 
 [Field Types](https://pydantic-docs.helpmanual.io/usage/types/)

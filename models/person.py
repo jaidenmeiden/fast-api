@@ -41,6 +41,7 @@ class Person(BaseModel):
         le=300
     )
     weight: Optional[float] = None
+    password: str = Field(..., min_length=8)
 
     # Example values
     # class Config:
@@ -56,3 +57,32 @@ class Person(BaseModel):
     #             "weight": 95
     #         }
     #     }
+
+
+class PersonOut(BaseModel):
+    first_name: str = Field(
+        ...,
+        min_length=1,
+        max_length=50,
+        example="Alfredo"  # Example values
+    )
+    last_name: str = Field(
+        ...,
+        min_length=1,
+        max_length=50
+    )
+    hair_color: Optional[HairColor] = Field(default=None)  # Example not working with this
+    biography: Optional[str] = Field(default=None)
+    is_married: Optional[bool] = Field(default=None)
+    age: int = Field(
+        ...,
+        gt=0,
+        le=115,
+        example="37"  # Example values
+    )
+    height: float = Field(
+        ...,
+        gt=0,
+        le=300
+    )
+    weight: Optional[float] = None
