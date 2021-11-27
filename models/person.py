@@ -33,7 +33,7 @@ class Person(BaseModel):
         ...,
         gt=0,
         le=115,
-        example="37"
+        example="37"  # Example values
     )
     height: float = Field(
         ...,
