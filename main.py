@@ -67,7 +67,7 @@ async def show_person(
     return {person_id: "It exists!"}
 
 
-# Path Parameters and Numeric Validations
+# Validations: Request body
 @app.put("/persons/{person_id}")
 async def update_person(
         person_id: int = Path(
@@ -82,3 +82,16 @@ async def update_person(
     results = person.dict()
     results.update(location.dict())
     return {person_id: results}
+
+
+@app.put("/persons/example/{person_id}")
+async def update_person(
+        person_id: int = Path(
+            ...,
+            gt=0,
+            title="The ID of the person to get",
+            description="This is the ID of the person. It's a value that start with one"
+        ),
+        person: Person = Body(...)
+):
+    return {person_id: person}

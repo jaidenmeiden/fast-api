@@ -1,11 +1,12 @@
 # Python
+from tkinter.scrolledtext import example
 from typing import Optional
 from enum import Enum
 # Pydantic
 from pydantic import BaseModel, Field
 
 
-class HairColor(Enum):
+class HairColor(Enum):  # Example not working with this
     white = "white"
     brown = "brown"
     black = "black"
@@ -17,20 +18,22 @@ class Person(BaseModel):
     first_name: str = Field(
         ...,
         min_length=1,
-        max_length=50
+        max_length=50,
+        example="Alfredo"  # Example values
     )
     last_name: str = Field(
         ...,
         min_length=1,
         max_length=50
     )
-    hair_color: Optional[HairColor] = Field(default=None)
+    hair_color: Optional[HairColor] = Field(default=None)  # Example not working with this
     biography: Optional[str] = Field(default=None)
     is_married: Optional[bool] = Field(default=None)
     age: int = Field(
         ...,
         gt=0,
-        le=115
+        le=115,
+        example="37"
     )
     height: float = Field(
         ...,
@@ -38,3 +41,18 @@ class Person(BaseModel):
         le=300
     )
     weight: Optional[float] = None
+
+    # Example values
+    # class Config:
+    #     schema_extra = {
+    #         "example": {
+    #             "first_name": "Jaiden",
+    #             "last_name": "Riaño Leiva",
+    #             "hair_color": "black",
+    #             "biography": "Machine Learning developer",
+    #             "is_married": False,
+    #             "age": 40,
+    #             "height": 185,
+    #             "weight": 95
+    #         }
+    #     }
