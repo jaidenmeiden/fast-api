@@ -1,16 +1,21 @@
-# This is a sample Python script.
+from fastapi import FastAPI, Body
+from models.person import Person
 
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+app = FastAPI()
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# app.get decorator
+@app.get("/")
+def home():
+    return {"Hello": "World"}
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+"""
+The three points (...) into Body class (Class from fastapi), where it 
+send the person information, means that is mandatory
+"""
+
+# Request and response body
+@app.post("/persons/new")
+async def create_person(person: Person = Body(...)):
+    return person
