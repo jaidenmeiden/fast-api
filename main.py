@@ -2,9 +2,8 @@
 from tkinter.scrolledtext import example
 from typing import Optional
 # fastAPI
-from fastapi import FastAPI, Body, Path, Query
+from fastapi import FastAPI, status, Body, Path, Query
 # Own classes
-from models import person
 from models.location import Location
 from models.person import Person, PersonOut
 
@@ -12,7 +11,10 @@ app = FastAPI()
 
 
 # app.get decorator
-@app.get("/")
+@app.get(
+    "/",
+    status_code=status.HTTP_200_OK
+)
 def home():
     return {"Hello": "World"}
 
@@ -24,13 +26,20 @@ send the person information, means that is mandatory
 
 
 # Request and response body
-@app.post("/persons/new", response_model=PersonOut)
+@app.post(
+    path="/person/new",
+    response_model=PersonOut,
+    status_code=status.HTTP_201_CREATED
+    )
 async def create_person(person: Person = Body(...)):
     return person
 
 
 # Validations query parameters
-@app.get("/persons/detail")
+@app.get(
+    path="/person/detail",
+    status_code=status.HTTP_200_OK
+)
 async def show_person(
         person_id: str = Query(
             ...,
@@ -59,7 +68,10 @@ async def show_person(
 
 
 # Path Parameters and Numeric Validations
-@app.get("/persons/detail/{person_id}")
+@app.get(
+    "/persons/detail/{person_id}",
+    status_code=status.HTTP_200_OK
+)
 async def show_person(
         person_id: int = Path(
             ...,
@@ -73,7 +85,10 @@ async def show_person(
 
 
 # Validations: Request body
-@app.put("/persons/{person_id}")
+@app.put(
+    "/persons/{person_id}",
+    status_code=status.HTTP_202_ACCEPTED
+)
 async def update_person(
         person_id: int = Path(
             ...,
@@ -90,7 +105,10 @@ async def update_person(
     return {person_id: results}
 
 
-@app.put("/persons/example/{person_id}")
+@app.put(
+    "/persons/example/{person_id}",
+    status_code=status.HTTP_202_ACCEPTED
+)
 async def update_person(
         person_id: int = Path(
             ...,
