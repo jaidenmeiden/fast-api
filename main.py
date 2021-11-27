@@ -3,6 +3,8 @@ from typing import Optional
 # fastAPI
 from fastapi import FastAPI, Body, Path, Query
 # Own classes
+from models import person
+from models.location import Location
 from models.person import Person
 
 app = FastAPI()
@@ -63,3 +65,20 @@ async def show_person(
         )
 ):
     return {person_id: "It exists!"}
+
+
+# Path Parameters and Numeric Validations
+@app.put("/persons/{person_id}")
+async def update_person(
+        person_id: int = Path(
+            ...,
+            gt=0,
+            title="The ID of the person to get",
+            description="This is the ID of the person. It's a value that start with one"
+        ),
+        person: Person = Body(...),
+        location: Location = Body(...)
+):
+    results = person.dict()
+    results.update(location.dict())
+    return {person_id: results}
